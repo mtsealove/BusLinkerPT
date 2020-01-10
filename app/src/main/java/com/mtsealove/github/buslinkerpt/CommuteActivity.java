@@ -1,41 +1,42 @@
 package com.mtsealove.github.buslinkerpt;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
+import com.google.zxing.Result;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
-import com.journeyapps.barcodescanner.CaptureManager;
-import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.mtsealove.github.buslinkerpt.Design.StatusBarManager;
 import com.mtsealove.github.buslinkerpt.Design.TitleView;
 
 import java.util.List;
 
-public class CommuteActivity extends AppCompatActivity {
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+public class CommuteActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     boolean work;
     TitleView titleView;
-    private DecoratedBarcodeView barcodeView;
-    private CaptureManager captureManager;
+    static DrawerLayout drawerLayout;
+
+    private ZXingScannerView mScannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commute);
+        drawerLayout = findViewById(R.id.drawerLayout);
         titleView = findViewById(R.id.titleView);
         StatusBarManager.setStatusBarWhite(this);
-        barcodeView = findViewById(R.id.db_qr);
-
-        captureManager = new CaptureManager(this, barcodeView);
-        captureManager.initializeFromIntent(getIntent(), savedInstanceState);
-        captureManager.decode();
 
         work = getIntent().getBooleanExtra("work", true);
 
@@ -46,7 +47,7 @@ public class CommuteActivity extends AppCompatActivity {
         }
 
         CheckCameraPermission();
-        initQrScanner();
+
     }
 
     //permission check
@@ -61,7 +62,9 @@ public class CommuteActivity extends AppCompatActivity {
     private PermissionListener permissionListener = new PermissionListener() {
         @Override
         public void onPermissionGranted() {
-
+            mScannerView = findViewById(R.id.scannerView);
+            mScannerView.setResultHandler(CommuteActivity.this); // Register ourselves as a handler for scan results.
+            mScannerView.startCamera();
         }
 
         @Override
@@ -71,28 +74,55 @@ public class CommuteActivity extends AppCompatActivity {
         }
     };
 
-    private void initQrScanner() {
-        Log.e("qr", "init");
 
-        IntentIntegrator intentIntegrator = new IntentIntegrator(this);
-        intentIntegrator.setBeepEnabled(false);//바코드 인식시 소리
-        intentIntegrator.setCaptureActivity(CommuteActivity.class);
-        intentIntegrator.initiateScan();
+    @Override
+    public void handleResult(Result rawResult) {
+        Log.e("qr", rawResult.getText()); // Prints scan results
+        onComplete();
+    }
+
+    //when qr read complete, show message and finish activity
+    private void onComplete() {
+        TextView completeMsgTv = findViewById(R.id.completeMsgTv);
+        TextView commentTv = findViewById(R.id.commentTv);
+        CardView completeCard = findViewById(R.id.completeCard);
+        String complete, comment;
+
+        if (work) {
+            complete = "출근 완료";
+            comment = "오늘도 행복한 하루 되세요.";
+        } else {
+            complete = "퇴근 완료";
+            comment = "오늘도 고생하셨습니다.";
+        }
+
+        completeMsgTv.setText(complete);
+        commentTv.setText(comment);
+
+        completeCard.setAlpha(1f);
+        completeCard.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fadein));
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 1000);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+    protected void onResume() {
+        super.onResume();
     }
 
+    public static void openDrawer() {
+        if(!drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.openDrawer(GravityCompat.START);
+    }
 
+    public static void closeDrawer() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START);
+    }
 }

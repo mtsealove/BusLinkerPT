@@ -1,6 +1,8 @@
 package com.mtsealove.github.buslinkerpt;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +15,13 @@ import com.mtsealove.github.buslinkerpt.Design.TitleView;
 public class MainActivity extends AppCompatActivity {
     TitleView titleView;
     LinearLayout onLayout, offLayout;
+    static DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        drawerLayout=findViewById(R.id.drawerLayout);
         titleView = findViewById(R.id.titleView);
         offLayout = findViewById(R.id.offLayout);
         onLayout = findViewById(R.id.onLayout);
@@ -53,4 +57,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public static void openDrawer() {
+        if(!drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    public static void closeDrawer() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START);
+    }
 }
