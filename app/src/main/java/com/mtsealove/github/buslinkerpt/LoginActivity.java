@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -16,6 +21,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mtsealove.github.buslinkerpt.Design.StatusBarManager;
+
+import java.security.MessageDigest;
 
 public class LoginActivity extends AppCompatActivity {
     LinearLayout logoLayout, loginLayout;
@@ -43,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 checkIpput();
             }
         });
+        getAppKeyHash();
     }
 
     //animate slide up and fade in
@@ -118,5 +126,21 @@ public class LoginActivity extends AppCompatActivity {
 
         startActivity(intent);
         finish();
+    }
+
+    private void getAppKeyHash() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                Log.e("Hash key", something);
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            Log.e("name not found", e.toString());
+        }
     }
 }

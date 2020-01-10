@@ -12,6 +12,7 @@ import com.mtsealove.github.buslinkerpt.CommuteActivity;
 import com.mtsealove.github.buslinkerpt.MainActivity;
 import com.mtsealove.github.buslinkerpt.R;
 import com.mtsealove.github.buslinkerpt.SendStatusActivity;
+import com.mtsealove.github.buslinkerpt.TutorialActivity;
 
 public class DrawerView extends RelativeLayout {
     Context context;
@@ -66,6 +67,12 @@ public class DrawerView extends RelativeLayout {
                 moveSendStatus();
             }
         });
+        tutorialBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveTutorial();
+            }
+        });
     }
 
     private void moveMain() {
@@ -81,6 +88,14 @@ public class DrawerView extends RelativeLayout {
             Intent intent = new Intent(context, SendStatusActivity.class);
             context.startActivity(intent);
         }
+        closeDrawer();
+    }
+
+    private void moveTutorial() {
+        Intent intent=new Intent(context, TutorialActivity.class);
+        intent.putExtra("isFirst", false);
+        context.startActivity(intent);
+        closeDrawer();
     }
 
 

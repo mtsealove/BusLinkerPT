@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.mtsealove.github.buslinkerpt.Design.StatusBarManager;
 import com.mtsealove.github.buslinkerpt.Design.TitleView;
@@ -66,4 +67,30 @@ public class MainActivity extends AppCompatActivity {
         if(drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START);
     }
+
+    //double back to finish
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
+
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            closeDrawer();
+        } else {
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime)
+        {
+            super.onBackPressed();
+        }
+        else
+        {
+            backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(), "'뒤로' 버튼을 한번 더 누르면 종료합니다.", Toast.LENGTH_SHORT).show();
+        }}
+    }
+
+
 }
+

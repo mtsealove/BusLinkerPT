@@ -1,6 +1,7 @@
 package com.mtsealove.github.buslinkerpt;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -72,15 +73,21 @@ public class TutorialActivity extends AppCompatActivity {
         if (current < sectionsPagerAdapter.getCount() - 1) {
             viewPager.setCurrentItem(current + 1);
         } else {
-            Log.e("move", "main");
             moveMain();
         }
     }
 
     //move to main page
     private void moveMain() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        boolean isFirst=getIntent().getBooleanExtra("isFirst", true);
+        if(isFirst) {
+            SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("tutorial", false);
+            editor.commit();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
         finish();
     }
 }

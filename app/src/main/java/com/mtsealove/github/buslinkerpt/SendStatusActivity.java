@@ -69,4 +69,11 @@ public class SendStatusActivity extends AppCompatActivity {
         intent.putExtra("isImport", isImport);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+            closeDrawer();
+        else super.onBackPressed();
+    }
 }
