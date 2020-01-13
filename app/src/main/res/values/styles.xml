@@ -25,5 +25,9 @@
         <item name="android:maxHeight">22dp</item>
     </style>
 
+    <style name="support_et" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/yellow</item>
+        <item name="colorControlNormal">@color/navy</item>
+    </style>
 
 </resources>

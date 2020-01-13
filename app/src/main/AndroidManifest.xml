@@ -16,12 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".SupportActivity"></activity>
+        <activity android:name=".TopItemActivity" />
+        <activity android:name=".CheckItemActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="30e9b64dd16116338c326e9b2b2c05f3"/>
+            android:value="30e9b64dd16116338c326e9b2b2c05f3" />
 
-        <activity android:name=".GuideActivity"></activity>
+        <activity android:name=".GuideActivity" />
         <activity android:name=".SendStatusActivity" />
         <activity android:name=".CommuteActivity" />
         <activity android:name=".MainActivity" />

@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mtsealove.github.buslinkerpt.CheckItemActivity;
 import com.mtsealove.github.buslinkerpt.CommuteActivity;
 import com.mtsealove.github.buslinkerpt.MainActivity;
 import com.mtsealove.github.buslinkerpt.R;
 import com.mtsealove.github.buslinkerpt.SendStatusActivity;
+import com.mtsealove.github.buslinkerpt.SupportActivity;
 
 public class TitleView extends RelativeLayout {
     Context context;
@@ -68,6 +70,12 @@ public class TitleView extends RelativeLayout {
                 break;
             case "SendStatusActivity":
                 SendStatusActivity.openDrawer();
+                break;
+            case "CheckItemActivity":
+                CheckItemActivity.openDrawer();
+                break;
+            case "SupportActivity":
+                SupportActivity.openDrawer();
                 break;
         }
     }

@@ -18,7 +18,7 @@
         android:id="@+id/titleTv"
         android:layout_centerInParent="true"
         android:layout_marginVertical="10dp"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
 </RelativeLayout>

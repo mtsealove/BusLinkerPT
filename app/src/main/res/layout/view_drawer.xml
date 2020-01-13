@@ -143,29 +143,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
-        <!--지난 기록-->
-        <LinearLayout
-            android:id="@+id/logBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:clickable="true"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:clickable="false"
-                android:src="@drawable/xbox" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="지난 기록"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

@@ -29,6 +29,7 @@ public class GuideActivity extends AppCompatActivity {
     TextView nameTv, carNumTv, companyTv, contactTv;
     Button actionBtn;
     ImageView backIv;
+    String action;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +50,13 @@ public class GuideActivity extends AppCompatActivity {
         initMap();
         signSeekBar.setProgress(1.5f);
 
+        action="상차";
+        actionBtn.setText(action+" 진행");
+
         actionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Action();
+                Action(action);
             }
         });
 
@@ -107,10 +111,10 @@ public class GuideActivity extends AppCompatActivity {
 
     }
 
-    private void Action() {
+    private void Action(String action) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("확인")
-                .setMessage("를 진행하시겠습니까?")
+                .setMessage(action+"를 진행하시겠습니까?")
                 .setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
