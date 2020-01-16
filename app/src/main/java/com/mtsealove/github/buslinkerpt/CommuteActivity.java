@@ -117,18 +117,18 @@ public class CommuteActivity extends AppCompatActivity implements ZXingScannerVi
     }
 
     public static void openDrawer() {
-        if(!drawerLayout.isDrawerOpen(GravityCompat.START))
+        if (!drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.openDrawer(GravityCompat.START);
     }
 
     public static void closeDrawer() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
             closeDrawer();
         else super.onBackPressed();
     }

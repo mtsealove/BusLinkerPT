@@ -19,10 +19,10 @@
             android:layout_height="wrap_content" />
 
         <!--form-->
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/formLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="15dp"
             android:orientation="vertical">
 
@@ -66,61 +66,6 @@
                     </LinearLayout>
 
                     <!--form data-->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="이름"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/nameEt"
-                        style="@style/support_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="이름"
-                        android:inputType="textPersonName"
-                        android:paddingVertical="15dp"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="전화번호"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/phoneEt"
-                        style="@style/support_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="전화번호"
-                        android:inputType="phone"
-                        android:paddingVertical="15dp"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="이메일"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/emailEt"
-                        style="@style/support_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="이메일"
-                        android:inputType="textEmailAddress"
-                        android:paddingVertical="15dp"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -138,25 +83,27 @@
                         android:gravity="top"
                         android:hint="내용"
                         android:inputType="textMultiLine"
-                        android:lines="3"
+                        android:lines="5"
                         android:paddingVertical="15dp"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/submitBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/second_btn"
-                        android:text="제출하기"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
 
                 </LinearLayout>
             </ScrollView>
-        </LinearLayout>
+
+            <Button
+                android:layout_alignParentBottom="true"
+                android:id="@+id/submitBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/second_btn"
+                android:text="제출하기"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
         <!--complete-->
         <RelativeLayout

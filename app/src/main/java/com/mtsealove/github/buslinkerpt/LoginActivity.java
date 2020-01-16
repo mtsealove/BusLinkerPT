@@ -21,8 +21,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mtsealove.github.buslinkerpt.Design.StatusBarManager;
+import com.mtsealove.github.buslinkerpt.Restful.Response.Login;
+import com.mtsealove.github.buslinkerpt.Restful.Rest;
 
 import java.security.MessageDigest;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     LinearLayout logoLayout, loginLayout;
@@ -88,28 +94,44 @@ public class LoginActivity extends AppCompatActivity {
         } else if (pwEt.getText().toString().length() == 0) {
             Toast.makeText(this, "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
         } else {    //checked
-            //todo
             onLoad();
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
+            String id = idEt.getText().toString();
+            String pw = pwEt.getText().toString();
+            Rest rest = new Rest();
+            Call<Login> call = rest.getRetrofitService().Login(new com.mtsealove.github.buslinkerpt.Restful.Request.Login(id, pw));
+            call.enqueue(new Callback<Login>() {
                 @Override
-                public void run() {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //show complete img
+                public void onResponse(Call<Login> call, Response<Login> response) {
+                    if (response.isSuccessful()) {
+                        //login success
+                        if (response.body().getID() != null) {
+                            // save id
+                            SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("UserName", response.body().getName());
+                            editor.putString("ID", response.body().getID());
+                            editor.putString("ProfilePath", response.body().getProfilePath());
+                            editor.commit();
+
                             onComplete();
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    //move to main page or tutorial page
                                     moveNext();
                                 }
                             }, 500);
+
+                        } else {    //login fail
+                            Toast.makeText(LoginActivity.this, "아이디와 비밀번호를 확인하세요", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
                 }
-            }, 1000);
+
+                @Override
+                public void onFailure(Call<Login> call, Throwable t) {
+                    Toast.makeText(LoginActivity.this, "서버 연결 실패", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

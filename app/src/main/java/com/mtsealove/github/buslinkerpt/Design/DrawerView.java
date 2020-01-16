@@ -1,15 +1,25 @@
 package com.mtsealove.github.buslinkerpt.Design;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.mtsealove.github.buslinkerpt.CheckItemActivity;
 import com.mtsealove.github.buslinkerpt.CommuteActivity;
+import com.mtsealove.github.buslinkerpt.LoginActivity;
 import com.mtsealove.github.buslinkerpt.MainActivity;
 import com.mtsealove.github.buslinkerpt.R;
 import com.mtsealove.github.buslinkerpt.SendStatusActivity;
@@ -20,6 +30,8 @@ public class DrawerView extends RelativeLayout {
     Context context;
     String contextName;
     LinearLayout commuteBtn, checkItemBtn, sendStatusBtn, tutorialBtn, requireBtn, logoutBtn;
+    TextView userNameTv;
+    ImageView profileIv;
 
     public DrawerView(Context context) {
         super(context);
@@ -53,7 +65,10 @@ public class DrawerView extends RelativeLayout {
         tutorialBtn = view.findViewById(R.id.tutorialBtn);
         requireBtn = view.findViewById(R.id.requireBtn);
         logoutBtn = view.findViewById(R.id.logoutBtn);
+        userNameTv = view.findViewById(R.id.userNameTv);
+        profileIv = view.findViewById(R.id.profileIv);
         addView(view);
+        setUser();
 
         commuteBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -61,7 +76,6 @@ public class DrawerView extends RelativeLayout {
                 moveMain();
             }
         });
-
         sendStatusBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +100,19 @@ public class DrawerView extends RelativeLayout {
                 moveSupport();
             }
         });
+        setLogoutBtn();
+    }
+
+    private void setUser() {
+        SharedPreferences pref = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String userName = pref.getString("UserName", "username");
+        userNameTv.setText(userName);
+
+        String profile = pref.getString("Profile", "/");
+        Glide.with(profileIv)
+                .load(profile)
+                .error(R.drawable.xbox);
+
     }
 
     private void moveMain() {
@@ -121,6 +148,38 @@ public class DrawerView extends RelativeLayout {
         Intent intent = new Intent(context, SupportActivity.class);
         context.startActivity(intent);
         closeDrawer();
+    }
+
+    private void setLogoutBtn() {
+        logoutBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("로그아웃")
+                        .setMessage("로그아웃 하시겠습니까?")
+                        .setNegativeButton("취소", null)
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                logout();
+                            }
+                        });
+                Dialog dialog=builder.create();
+                dialog.show();
+            }
+        });
+    }
+
+    private void logout() {
+        SharedPreferences pref = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
+
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+        Toast.makeText(context, "로그아웃 되었습니다", Toast.LENGTH_SHORT).show();
+        ((Activity) context).finishAffinity();
     }
 
 
