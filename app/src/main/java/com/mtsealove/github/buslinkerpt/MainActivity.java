@@ -1,86 +1,85 @@
 package com.mtsealove.github.buslinkerpt;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.mtsealove.github.buslinkerpt.Design.StatusBarManager;
-import com.mtsealove.github.buslinkerpt.Design.TitleView;
+import com.mtsealove.github.buslinkerpt.Fragments.MainSectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    TitleView titleView;
-    LinearLayout onLayout, offLayout;
-    static DrawerLayout drawerLayout;
-    TextView userNameTv;
+    TabLayout tabs;
+    ViewPager viewPager;
+    MainSectionsPagerAdapter mainSectionsPagerAdapter;
+    int tabIconColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        drawerLayout = findViewById(R.id.drawerLayout);
-        titleView = findViewById(R.id.titleView);
-        offLayout = findViewById(R.id.offLayout);
-        onLayout = findViewById(R.id.onLayout);
-        titleView.setTitle("");
-        userNameTv = findViewById(R.id.userNameTv);
+        mainSectionsPagerAdapter = new MainSectionsPagerAdapter(this, getSupportFragmentManager());
+        viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(mainSectionsPagerAdapter);
+        tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+        tabIconColor = ContextCompat.getColor(MainActivity.this, R.color.unselected);
+        setTabs();
 
         StatusBarManager.setStatusBarWhite(this);
-
-        offLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WorkOff();
-            }
-        });
-        onLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WorkOn();
-            }
-        });
-        setUserName();
     }
 
-    //reed user name
-    private void setUserName() {
-        SharedPreferences pref=getSharedPreferences("pref", MODE_PRIVATE);
-        String userName=pref.getString("UserName", "사용자");
-        userNameTv.setText(userName+" 님");
+    //    set tab color and name
+    private void setTabs() {
+        tabs.getTabAt(0).setIcon(R.drawable.tab_commute);
+        tabs.getTabAt(0).setText("");
+
+        tabs.getTabAt(1).setText("");
+        tabs.getTabAt(2).setIcon(R.drawable.tab_item);
+        tabs.getTabAt(2).setText("");
+        ImageView logoTab = new ImageView(this);
+        logoTab.setImageDrawable(getDrawable(R.drawable.logo_tab));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(240, 240);
+        params.setMargins(0, 0, 0, 20);
+        logoTab.setLayoutParams(params);
+        tabs.getTabAt(1).setCustomView(logoTab);
+        tabs.selectTab(tabs.getTabAt(1));
+
+        tabs.getTabAt(0).getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+        tabs.getTabAt(2).getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+
+        tabs.setOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        super.onTabSelected(tab);
+                        if (tab.getIcon() != null)
+                            tab.getIcon().clearColorFilter();
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        super.onTabUnselected(tab);
+                        if (tab.getIcon() != null)
+                            tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                        super.onTabReselected(tab);
+                    }
+                }
+        );
+
     }
 
-    //work off QR
-    private void WorkOff() {
-        Intent intent = new Intent(this, CommuteActivity.class);
-        intent.putExtra("work", false);
-        startActivity(intent);
-    }
 
-    //work on QR
-    private void WorkOn() {
-        Intent intent = new Intent(this, CommuteActivity.class);
-        intent.putExtra("work", true);
-        startActivity(intent);
-    }
-
-    public static void openDrawer() {
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.openDrawer(GravityCompat.START);
-    }
-
-    public static void closeDrawer() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.closeDrawer(GravityCompat.START);
-    }
-
-    //double back to finish
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
@@ -89,18 +88,11 @@ public class MainActivity extends AppCompatActivity {
         long tempTime = System.currentTimeMillis();
         long intervalTime = tempTime - backPressedTime;
 
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            closeDrawer();
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
+            super.onBackPressed();
         } else {
-            if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
-                super.onBackPressed();
-            } else {
-                backPressedTime = tempTime;
-                Toast.makeText(getApplicationContext(), "'뒤로' 버튼을 한번 더 누르면 종료합니다.", Toast.LENGTH_SHORT).show();
-            }
+            backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(), "'뒤로가기' 버튼을 한 번 더 누르면 종료합니다.", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 }
-

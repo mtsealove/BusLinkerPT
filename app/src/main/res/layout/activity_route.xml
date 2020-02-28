@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sky_blue"
+    tools:context=".RouteActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/navy"
+        android:gravity="center"
+        android:paddingVertical="15dp"
+        android:text="경로 안내"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        android:id="@+id/sliding_layout"
+        android:layout_above="@id/statusBtn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title"
+        android:gravity="bottom"
+        sothree:umanoFadeColor="@color/transparent"
+        sothree:umanoPanelHeight="100dp"
+        sothree:umanoShadowHeight="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/navy"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/routeNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="마포-CJ대한통운"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CJ대한통운에서 공터01로 이동중"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:id="@+id/startLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/route_start" />
+
+                    <TextView
+                        android:id="@+id/currentStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="CJ대한통운"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_toLeftOf="@id/endLayout"
+                    android:layout_toRightOf="@id/startLayout"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="0"
+                        android:src="@drawable/route_dash" />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="0"
+                        android:src="@drawable/route_dash" />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="0"
+                        android:src="@drawable/route_dash" />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="0"
+                        android:src="@drawable/route_dash" />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="0"
+                        android:src="@drawable/route_dash" />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="0"
+                        android:src="@drawable/route_dash" />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="0"
+                        android:src="@drawable/route_dash" />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="0"
+                        android:src="@drawable/route_dash" />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="0"
+                        android:src="@drawable/route_dash" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/endLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/route_end" />
+
+                    <TextView
+                        android:id="@+id/currentEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="공터0"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/route_summary"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/logo_negative" />
+
+                    <TextView
+                        android:id="@+id/dateTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="2020-01-18"
+                        android:textColor="@color/navy"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:stretchColumns="0, 1, 2">
+
+                    <TableRow>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="버스사"
+                                android:textColor="@color/navy"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/corpTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="코리아투어"
+                                android:textColor="@color/navy"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="차량번호"
+                                android:textColor="@color/navy"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/numTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="13육5151"
+                                android:textColor="@color/navy"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginTop="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="물류사"
+                                android:textColor="@color/navy"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/logiTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CJ 대한통운"
+                                android:textColor="@color/navy"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="상차 터미널"
+                                android:textColor="@color/navy"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="T20"
+                                android:textColor="@color/navy"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="하차 터미널"
+                                android:textColor="@color/navy"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="T26"
+                                android:textColor="@color/navy"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginTop="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="물류관리 직원"
+                                android:textColor="@color/navy"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/PtTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="조성호"
+                                android:textColor="@color/navy"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/navy"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/PtPhoneTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="010-1111-2222"
+                                android:textColor="@color/navy"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp" />
+                    </TableRow>
+
+                </TableLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/backgroundLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/route_detail"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp">
+
+                <ImageView
+                    android:id="@+id/drawerIv"
+                    android:layout_width="30dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/slide_up" />
+
+                <RelativeLayout
+                    android:id="@+id/clickLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/route_current"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="10:00"
+                        android:textColor="@color/navy"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="공터"
+                            android:textColor="@color/navy"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/addr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="서울시 영등포구 의사당대로 1"
+                            android:textColor="@color/navy"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/phoneIv"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/route_phone" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginHorizontal="80dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/divider" />
+                android:background="@drawable/divider" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/routeRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="10dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+    <Button
+        android:id="@+id/statusBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="상차 진행"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:background="@color/navy"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

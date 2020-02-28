@@ -9,8 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mtsealove.github.buslinkerpt.CheckItemActivity;
-import com.mtsealove.github.buslinkerpt.CommuteActivity;
-import com.mtsealove.github.buslinkerpt.MainActivity;
+import com.mtsealove.github.buslinkerpt.QrActivity;
 import com.mtsealove.github.buslinkerpt.R;
 import com.mtsealove.github.buslinkerpt.SendStatusActivity;
 import com.mtsealove.github.buslinkerpt.SupportActivity;
@@ -63,10 +62,9 @@ public class TitleView extends RelativeLayout {
         String contextName=context.getClass().getSimpleName();
         switch (contextName) {
             case "MainActivity":
-                MainActivity.openDrawer();
                 break;
-            case "CommuteActivity":
-                CommuteActivity.openDrawer();
+            case "QrActivity":
+
                 break;
             case "SendStatusActivity":
                 SendStatusActivity.openDrawer();

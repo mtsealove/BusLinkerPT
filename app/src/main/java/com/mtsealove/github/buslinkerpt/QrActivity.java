@@ -6,9 +6,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,37 +19,40 @@ import com.google.zxing.Result;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.mtsealove.github.buslinkerpt.Design.StatusBarManager;
-import com.mtsealove.github.buslinkerpt.Design.TitleView;
+import com.mtsealove.github.buslinkerpt.Restful.Request.Commute;
+import com.mtsealove.github.buslinkerpt.Restful.Rest;
 
 import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class CommuteActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
+public class QrActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     boolean work;
-    TitleView titleView;
-    static DrawerLayout drawerLayout;
+    TextView titleTv;
+    String id;
 
     private ZXingScannerView mScannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_commute);
-        drawerLayout = findViewById(R.id.drawerLayout);
-        titleView = findViewById(R.id.titleView);
+        setContentView(R.layout.activity_qr);
         StatusBarManager.setStatusBarWhite(this);
+        titleTv = findViewById(R.id.commuteTitle);
+        SharedPreferences account = getSharedPreferences("accountV", MODE_PRIVATE);
+        id = account.getString("id", "");
 
         work = getIntent().getBooleanExtra("work", true);
-
         if (work) {
-            titleView.setTitle("출근");
+            titleTv.setText("출근");
         } else {
-            titleView.setTitle("퇴근");
+            titleTv.setText("퇴근");
         }
 
         CheckCameraPermission();
-
     }
 
     //permission check
@@ -63,22 +68,40 @@ public class CommuteActivity extends AppCompatActivity implements ZXingScannerVi
         @Override
         public void onPermissionGranted() {
             mScannerView = findViewById(R.id.scannerView);
-            mScannerView.setResultHandler(CommuteActivity.this); // Register ourselves as a handler for scan results.
+            mScannerView.setResultHandler(QrActivity.this); // Register ourselves as a handler for scan results.
             mScannerView.startCamera();
         }
 
         @Override
         public void onPermissionDenied(List<String> deniedPermissions) {
-            Toast.makeText(CommuteActivity.this, "카메라 권한을 허용하셔야 합니다", Toast.LENGTH_SHORT).show();
+            Toast.makeText(QrActivity.this, "카메라 권한을 허용하셔야 합니다", Toast.LENGTH_SHORT).show();
             finish();
         }
     };
 
 
     @Override
-    public void handleResult(Result rawResult) {
+    public void handleResult(final Result rawResult) {
         Log.e("qr", rawResult.getText()); // Prints scan results
-        onComplete();
+        Rest rest = new Rest();
+        Commute commute = new Commute(id, rawResult.getText());
+        Call<com.mtsealove.github.buslinkerpt.Restful.Response.Result> call = rest.getRetrofitService().CheckQrCode(commute);
+        call.enqueue(new Callback<com.mtsealove.github.buslinkerpt.Restful.Response.Result>() {
+            @Override
+            public void onResponse(Call<com.mtsealove.github.buslinkerpt.Restful.Response.Result> call, Response<com.mtsealove.github.buslinkerpt.Restful.Response.Result> response) {
+                if (response.isSuccessful() && response.body().isResult()) {
+                    onComplete();
+                } else {
+                    Toast.makeText(QrActivity.this, "인증 코드가 유효하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    mScannerView.resumeCameraPreview(QrActivity.this);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<com.mtsealove.github.buslinkerpt.Restful.Response.Result> call, Throwable t) {
+                Toast.makeText(QrActivity.this, "서버 연결 실패", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //when qr read complete, show message and finish activity
@@ -116,20 +139,7 @@ public class CommuteActivity extends AppCompatActivity implements ZXingScannerVi
         super.onResume();
     }
 
-    public static void openDrawer() {
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.openDrawer(GravityCompat.START);
-    }
-
-    public static void closeDrawer() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.closeDrawer(GravityCompat.START);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-            closeDrawer();
-        else super.onBackPressed();
+    public void Back(View view) {
+        finish();
     }
 }

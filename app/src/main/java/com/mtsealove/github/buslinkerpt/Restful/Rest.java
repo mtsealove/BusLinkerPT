@@ -54,7 +54,7 @@ public class Rest {
     private String GetIP() {
 //        SharedPreferences pref = context.getSharedPreferences("pref", MODE_PRIVATE);
         //return "http://" + pref.getString("ip", "192.168.0.4")+":3300";
-        return "http://192.168.0.4:3300";
+        return "http://172.30.1.57:3300";
     }
 
 }

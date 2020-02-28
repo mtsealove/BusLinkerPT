@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SupportActivity"></activity>
+        <activity android:name=".RouteActivity"></activity>
+        <activity android:name=".SupportActivity" />
         <activity android:name=".TopItemActivity" />
         <activity android:name=".CheckItemActivity" />
 
@@ -26,7 +27,7 @@
 
         <activity android:name=".GuideActivity" />
         <activity android:name=".SendStatusActivity" />
-        <activity android:name=".CommuteActivity" />
+        <activity android:name=".QrActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".TutorialActivity"
@@ -39,6 +40,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ScheduleActivity" />
+        <activity android:name=".AskActivity" />
     </application>
 
 </manifest>

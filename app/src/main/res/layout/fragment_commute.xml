@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragments.CommuteFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="30dp">
+
+        <TextView
+            android:id="@+id/hi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="안녕하세요."
+            android:textColor="@color/navy"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hi"
+            android:text="사용자 님"
+            android:textColor="@color/navy"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/startBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/second_btn"
+                android:gravity="left|center_vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="15dp"
+                android:text="출근하시겠어요?\n출근 QR코드를 스캔합니다."
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/endBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/second_btn"
+                android:gravity="left|center_vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="퇴근하시겠어요?\n퇴근 QR코드를 스캔합니다."
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

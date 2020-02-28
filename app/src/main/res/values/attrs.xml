@@ -3,4 +3,6 @@
     <declare-styleable name="TitleView" />
     <declare-styleable name="DrawerView" />
     <declare-styleable name="HorizontalLogoView" />
-</resources>
+    <declare-styleable name="LogoView" />
+    <declare-styleable name="HeaderView" />
+ </resources>

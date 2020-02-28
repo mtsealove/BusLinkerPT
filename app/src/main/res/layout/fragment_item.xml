@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="30dp"
+    tools:context=".Fragments.ItemFragment">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="24sp"
+           android:textColor="@color/navy"
+           android:text="오늘은" />
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+
+           <TextView
+               android:id="@+id/sendTv"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="24sp"
+               android:textColor="@color/navy"
+               android:textStyle="bold"
+               android:text="400건의 배송" />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="24sp"
+               android:textColor="@color/navy"
+               android:text="과" />
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+
+           <TextView
+               android:id="@+id/takeTv"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="24sp"
+               android:textColor="@color/navy"
+               android:textStyle="bold"
+               android:text="400건의 수거" />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="24sp"
+               android:textColor="@color/navy"
+               android:text="가 있습니다." />
+       </LinearLayout>
+   </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/routeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/second_btn"
+            android:gravity="left|center_vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="15dp"
+            android:text="배송 및 수거 물량을 확인하시겠어요?\n배송과 수거 물량에 대한 상태를 전송합니다."
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/positionBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/second_btn"
+            android:gravity="left|center_vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="15dp"
+            android:text="물량 배치를 확인하시겠어요?\n물류사 배송 물량에 대한 배치를 확인합니다."
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

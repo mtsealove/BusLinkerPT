@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "713685466621",
+    "firebase_url": "https://buslinker2.firebaseio.com",
+    "project_id": "buslinker2",
+    "storage_bucket": "buslinker2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713685466621:android:bf0b69a85ec794d9e72d94",
+        "android_client_info": {
+          "package_name": "com.mtsealove.github.buslinkeDV"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713685466621-95jjsklitdunads6qaiior3qdhg29s17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHiVv9qyoNB32bJwMztIdml2VQPGDdVo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713685466621-95jjsklitdunads6qaiior3qdhg29s17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713685466621:android:57ba96d182a79461e72d94",
+        "android_client_info": {
+          "package_name": "com.mtsealove.github.buslinkerpt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713685466621-95jjsklitdunads6qaiior3qdhg29s17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHiVv9qyoNB32bJwMztIdml2VQPGDdVo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713685466621-95jjsklitdunads6qaiior3qdhg29s17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

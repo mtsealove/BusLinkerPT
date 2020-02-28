@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="15dp">
+
+        <ImageView
+            android:onClick="Back"
+            android:id="@+id/backIv"
+            android:layout_width="13dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back_navy" />
+
+        <TextView
+            android:id="@+id/commuteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="출근"
+            android:textColor="@color/navy"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/scannerView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:text="기사님의 QR 코드로\n카메라를 이동해 주세요"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <me.dm7.barcodescanner.zxing.ZXingScannerView
+        android:id="@+id/scannerView"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_centerInParent="true" />
+
+    <com.mtsealove.github.buslinkerpt.Design.HorizontalLogoView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/completeCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="40dp"
+        android:alpha="0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/check_box" />
+
+            <TextView
+                android:id="@+id/completeMsgTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="완료"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/commentTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="오늘도 ..."
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

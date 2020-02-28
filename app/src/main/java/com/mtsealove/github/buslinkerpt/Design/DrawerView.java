@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mtsealove.github.buslinkerpt.CheckItemActivity;
-import com.mtsealove.github.buslinkerpt.CommuteActivity;
+import com.mtsealove.github.buslinkerpt.QrActivity;
 import com.mtsealove.github.buslinkerpt.LoginActivity;
 import com.mtsealove.github.buslinkerpt.MainActivity;
 import com.mtsealove.github.buslinkerpt.R;
@@ -186,10 +186,9 @@ public class DrawerView extends RelativeLayout {
     private void closeDrawer() {
         switch (contextName) {
             case "MainActivity":
-                MainActivity.closeDrawer();
+
                 break;
-            case "CommuteActivity":
-                CommuteActivity.closeDrawer();
+            case "QrActivity":
                 break;
             case "SendStatusActivity":
                 SendStatusActivity.closeDrawer();

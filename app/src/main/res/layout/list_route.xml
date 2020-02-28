@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/clickLayout"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:paddingHorizontal="10dp">
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="10:00"
+        android:textColor="@color/navy"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공터"
+            android:textColor="@color/navy"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/addr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서울시 영등포구 의사당대로 1"
+            android:textColor="@color/navy"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <View
+            android:layout_marginRight="10dp"
+            android:id="@+id/topLine"
+            android:layout_width="4dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/navy" />
+
+        <View
+            android:layout_marginRight="10dp"
+            android:id="@+id/bottomLine"
+            android:layout_width="4dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/topLine"
+            android:layout_alignParentRight="true"
+            android:background="@color/navy" />
+
+        <ImageView
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/indicator"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/route_end" />
+
+        <ImageView
+            android:id="@+id/currentIndicator"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/bus_current"
+            android:visibility="gone"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

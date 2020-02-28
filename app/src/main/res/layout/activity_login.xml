@@ -4,32 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background"
     tools:context=".LoginActivity">
 
-    <LinearLayout
-        android:id="@+id/logoLayout"
+
+    <com.mtsealove.github.buslinkerpt.Design.LogoView
+        android:id="@+id/logoView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/logo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="BusLinker"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
+        android:layout_centerInParent="true" />
 
     <LinearLayout
         android:id="@+id/loginLayout"
@@ -49,7 +32,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/login_et"
             android:hint="Email"
-            android:padding="5dp"
+            android:elevation="2dp"
+            android:padding="10dp"
             android:textSize="18sp" />
 
 
@@ -61,18 +45,44 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/login_et"
             android:hint="Password"
-            android:padding="5dp"
+            android:padding="10dp"
+            android:elevation="2dp"
             android:textSize="18sp" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/primary_btn"
+            android:background="@drawable/second_btn"
             android:text="로그인"
+            android:paddingVertical="10dp"
             android:textColor="@color/white"
             android:id="@+id/loginBtn"
             android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/keepCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/navy"
+                android:text="자동 로그인"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/pwTv"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/navy"
+                android:textSize="14sp"
+                android:text="비밀번호를 잊어버리셨습니까?"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/loadIv"

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ScheduleActivity">
+
+    <RelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="15dp">
+
+        <ImageView
+            android:onClick="Back"
+            android:id="@+id/backIv"
+            android:layout_width="13dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back_navy" />
+
+        <TextView
+            android:id="@+id/commuteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="스케줄 확인"
+            android:textColor="@color/navy"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:layout_marginHorizontal="10dp"
+        android:layout_below="@id/titleLayout"
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mcv_showOtherDates="all"
+        app:mcv_selectionColor="@color/navy"
+        app:mcv_selectionMode="single"/>
+
+    <LinearLayout
+        android:layout_below="@id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="10dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:text="1월 18일"
+                android:id="@+id/dateTv"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/nameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="마포-대한통운"
+                android:textColor="@color/navy"
+                android:textSize="14sp"
+                android:layout_below="@id/dateTv" />
+
+            <TextView
+                android:id="@+id/numTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13육5151"
+                android:textColor="@color/navy"
+                android:textSize="14sp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/dateTv" />
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/routeRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:id="@+id/restLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/coffee"
+                android:layout_marginTop="10dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/coffee" />
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/coffee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#2E2E2E"
+                android:text="일정이 없습니다."
+                android:textStyle="bold"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
