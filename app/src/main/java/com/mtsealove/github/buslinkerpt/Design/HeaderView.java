@@ -1,6 +1,7 @@
 package com.mtsealove.github.buslinkerpt.Design;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.mtsealove.github.buslinkerpt.AlertActivity;
 import com.mtsealove.github.buslinkerpt.R;
 
 public class HeaderView extends RelativeLayout {
@@ -41,10 +43,10 @@ public class HeaderView extends RelativeLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.view_header, null, false);
         notiIv = view.findViewById(R.id.notiIv);
-        //setNoti();
+        setNoti();
         addView(view);
     }
-    /*
+
 
     private void setNoti() {
         notiIv.setOnClickListener(new OnClickListener() {
@@ -56,6 +58,8 @@ public class HeaderView extends RelativeLayout {
         });
     }
 
+
+    /*
     public void updateNoti() {
         openHelper = new AlertOpenHelper(context, AlertOpenHelper.Table, null, 1);
         db = openHelper.getReadableDatabase();

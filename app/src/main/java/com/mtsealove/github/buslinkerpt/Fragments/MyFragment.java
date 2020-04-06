@@ -125,7 +125,10 @@ public class MyFragment extends Fragment {
             @Override
             public void onResponse(Call<My> call, Response<My> response) {
                 if (response.isSuccessful()) {
-                    routeTv.setText(response.body().getRouteName());
+                    if(response.body().getRouteName()!=null) {
+                        routeTv.setText(response.body().getRouteName());
+                    }
+
                     itemCntTv.setText(response.body().getItemCnt()+"개의 화물");
                     Glide.with(getContext())
                             .load("http://172.30.1.57:3200/public/uploads/"+response.body().getProfilePath())

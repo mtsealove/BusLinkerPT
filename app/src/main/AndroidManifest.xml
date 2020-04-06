@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RouteActivity"></activity>
+        <activity android:name=".ReadyActivity" android:theme="@style/Transparent"></activity>
+        <activity android:name=".RouteActivity" />
         <activity android:name=".SupportActivity" />
         <activity android:name=".TopItemActivity" />
         <activity android:name=".CheckItemActivity" />
@@ -42,6 +43,12 @@
         </activity>
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".AskActivity" />
+        <activity android:name=".AlertActivity" />
+        <service android:name=".Services.FireBaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

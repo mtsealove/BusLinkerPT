@@ -1,5 +1,6 @@
 package com.mtsealove.github.buslinkerpt;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mtsealove.github.buslinkerpt.Design.RouteRecyclerAdapter;
 import com.mtsealove.github.buslinkerpt.Design.RouteView;
@@ -39,7 +41,7 @@ import retrofit2.Response;
 public class RouteActivity extends AppCompatActivity {
     SlidingUpPanelLayout slidingPaneLayout;
     RecyclerView routeRv;
-    TextView corpTv, numTv, logiTv, ptNameTv, ptPhoneTv, routeNameTv, currentName, currentTime, currentAddr, currentStart, currentEnd, subTitle, dateTv;
+    TextView corpTv, numTv, logiTv, routeNameTv, currentName, currentTime, currentAddr, currentStart, currentEnd, subTitle, dateTv, dvPhoneTV, dvNameTv, deliveryTv, takeTv;
     ImageView phoneIv, drawerIv;
     List<Timeline> timelineList;
     Button statusBtn;
@@ -47,20 +49,26 @@ public class RouteActivity extends AppCompatActivity {
     private RouteRecyclerAdapter recyclerAdapter;
     LinearLayout backgroundLayout;
     ArrayList<String> actionList, locList;
+    private int RouteID = 0;
+    final int READY = 200;
+    int level = 0;
+    String date = null;
+    SimpleDateFormat format;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
         StatusBarManager.setStatusBarNaby(this);
+        format = new SimpleDateFormat("yyyyMMdd");
 
         slidingPaneLayout = findViewById(R.id.sliding_layout);
         routeRv = findViewById(R.id.routeRv);
         corpTv = findViewById(R.id.corpTv);
         numTv = findViewById(R.id.numTv);
         logiTv = findViewById(R.id.logiTv);
-        ptNameTv = findViewById(R.id.PtTv);
-        ptPhoneTv = findViewById(R.id.PtPhoneTv);
+        dvNameTv = findViewById(R.id.DvNameTv);
+        dvPhoneTV = findViewById(R.id.DvPhoneTv);
         routeNameTv = findViewById(R.id.routeNameTv);
         currentName = findViewById(R.id.name);
         currentAddr = findViewById(R.id.addr);
@@ -73,11 +81,48 @@ public class RouteActivity extends AppCompatActivity {
         backgroundLayout = findViewById(R.id.backgroundLayout);
         dateTv = findViewById(R.id.dateTv);
         statusBtn = findViewById(R.id.statusBtn);
+        deliveryTv = findViewById(R.id.deliveryTv);
+        takeTv = findViewById(R.id.takeTv);
+        Intent intent = getIntent();
+        deliveryTv.setText(intent.getIntExtra("delivery", 0) + "박스");
+        takeTv.setText(intent.getIntExtra("take", 0) + "박스");
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         dateTv.setText(format.format(new Date()));
         getRouteTimeline();
         setPanel();
+        level = getLevel();
+    }
+
+    private void setDate() {
+        SharedPreferences pref = getSharedPreferences("date", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("date", format.format(new Date()));
+        editor.commit();
+    }
+
+    private boolean otherDate() {
+        String today=format.format(new Date());
+        SharedPreferences pref=getSharedPreferences("date", MODE_PRIVATE);
+        String date=pref.getString("date", "");
+        if(date.equals(today)) {
+            return  false;
+        } else {
+            return true;
+        }
+    }
+
+    private int getLevel() {
+        SharedPreferences pref = getSharedPreferences("level", MODE_PRIVATE);
+        int l = pref.getInt("level", 0);
+        return l;
+    }
+
+    private void setLevel(int l) {
+        SharedPreferences pref = getSharedPreferences("level", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("level", l);
+        editor.commit();
     }
 
     @SuppressLint("MissingPermission")
@@ -96,15 +141,16 @@ public class RouteActivity extends AppCompatActivity {
                     List<Timeline> timelines = route_timeline.getTimeline();
 
                     if (route != null) {
+                        RouteID = route.getRouteID();
                         corpTv.setText(route.getCorp());
                         numTv.setText(route.getNum());
                         logiTv.setText(route.getLogiName());
-                        ptNameTv.setText(route.getPTName());
-                        ptPhoneTv.setText(route.getPTPhone());
+                        dvNameTv.setText(route.getDriverName());
+                        dvPhoneTV.setText(route.getDriverPhone());
                         routeNameTv.setText(route.getName());
                         timelineList = timelines;
                         setRoute(timelines);
-                        setAction(timelines);
+                        setAction(timelines, RouteID);
                     }
 
                 } else {
@@ -156,7 +202,7 @@ public class RouteActivity extends AppCompatActivity {
     //    set action strings
     int current = 0;
 
-    private void setAction(List<Timeline> timelines) {
+    private void setAction(List<Timeline> timelines, final int routeID) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         final String date = format.format(new Date());
         final SharedPreferences pref = getSharedPreferences("route", MODE_PRIVATE);
@@ -192,8 +238,31 @@ public class RouteActivity extends AppCompatActivity {
                 locList.add(timeline.getLocName());
             }
         }
-        statusBtn.setText(actionList.get(current));
+
+        final int max = actionList.size();
         statusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RouteActivity.this, ReadyActivity.class);
+                intent.putExtra("routeID", routeID);
+                intent.putExtra("max", max);
+                startActivityForResult(intent, READY);
+            }
+        });
+        try {
+            statusBtn.setText(actionList.get(level));
+        } catch (Exception e) {
+            if(otherDate()) {
+                setLevel(0);
+            } else {
+                statusBtn.setText("일정 완료");
+                statusBtn.setOnClickListener(null);
+                statusBtn.setClickable(false);
+            }
+        }
+
+
+        /*statusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RouteActivity.this);
@@ -217,11 +286,13 @@ public class RouteActivity extends AppCompatActivity {
                             statusBtn.setOnClickListener(null);
                             statusBtn.setText("완료");
                         }
+
                     }
                 });
                 builder.create().show();
             }
         });
+         */
     }
 
     //   calculate distance and set nearest route
@@ -270,5 +341,27 @@ public class RouteActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case READY:
+                    int lv = data.getIntExtra("level", 1);
+                    setLevel(lv);
+                    level = lv;
+                    if (actionList.size() > level) {
+                        statusBtn.setText(actionList.get(level));
+                    } else {
+                        Toast.makeText(RouteActivity.this, "일정이 모두 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                        statusBtn.setClickable(false);
+                        statusBtn.setText("일정 완료");
+                        setDate();
+                    }
+                    break;
+            }
+        }
     }
 }

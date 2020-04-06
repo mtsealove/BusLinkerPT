@@ -6,8 +6,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -19,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     MainSectionsPagerAdapter mainSectionsPagerAdapter;
     int tabIconColor;
+    LinearLayout bottomLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bottomLayout=findViewById(R.id.bottomLayout);
         mainSectionsPagerAdapter = new MainSectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(mainSectionsPagerAdapter);
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
     //    set tab color and name
     private void setTabs() {
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        int width = dm.widthPixels;
+
         tabs.getTabAt(0).setIcon(R.drawable.tab_commute);
         tabs.getTabAt(0).setText("");
 
@@ -45,7 +52,16 @@ public class MainActivity extends AppCompatActivity {
         tabs.getTabAt(2).setText("");
         ImageView logoTab = new ImageView(this);
         logoTab.setImageDrawable(getDrawable(R.drawable.logo_tab));
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(240, 240);
+        LinearLayout.LayoutParams params = null;
+        if (width >= 1440) {
+            params = new LinearLayout.LayoutParams(240, 240);
+        } else {
+            params = new LinearLayout.LayoutParams(180, 180);
+            RelativeLayout.LayoutParams bottomParams= (RelativeLayout.LayoutParams) bottomLayout.getLayoutParams();
+            bottomParams.height=160;
+            bottomLayout.setLayoutParams(bottomParams);
+        }
+
         params.setMargins(0, 0, 0, 20);
         logoTab.setLayoutParams(params);
         tabs.getTabAt(1).setCustomView(logoTab);

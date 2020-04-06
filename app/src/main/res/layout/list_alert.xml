@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="10dp"
+    android:clickable="true"
+    android:id="@+id/clickLayout"
+    android:background="@drawable/login_et"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="2dp"
+    android:padding="15dp">
+
+    <View
+        android:layout_centerVertical="true"
+        android:id="@+id/alertStatus"
+        android:background="@drawable/noti_new"
+        android:layout_width="10dp"
+        android:layout_height="65dp" />
+
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/alertStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/alertTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/navy"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="알림 제목" />
+
+            <TextView
+                android:id="@+id/alertTime"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="날짜"
+                android:textColor="@color/navy" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/alertMsg"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/navy"
+            android:text="알림 내용\n내용"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</RelativeLayout>

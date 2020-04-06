@@ -9,6 +9,7 @@
     tools:context=".Fragments.ItemFragment">
 
    <LinearLayout
+
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="vertical">
@@ -19,6 +20,11 @@
            android:textColor="@color/navy"
            android:text="오늘은" />
 
+       <LinearLayout
+           android:id="@+id/existLayout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
        <LinearLayout
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -62,6 +68,16 @@
                android:textColor="@color/navy"
                android:text="가 있습니다." />
        </LinearLayout>
+       </LinearLayout>
+       <TextView
+           android:visibility="gone"
+           android:id="@+id/notExistTv"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textStyle="bold"
+           android:textColor="@color/navy"
+           android:textSize="24sp"
+           android:text="운행이 없습니다."/>
    </LinearLayout>
 
 
@@ -84,7 +100,8 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/positionBtn"
+            android:visibility="gone"
+            android:id="@+id/scheduleBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -93,7 +110,7 @@
             android:gravity="left|center_vertical"
             android:paddingHorizontal="20dp"
             android:paddingVertical="15dp"
-            android:text="물량 배치를 확인하시겠어요?\n물류사 배송 물량에 대한 배치를 확인합니다."
+            android:text="스케줄을 확인하시겠어요?\n이번달의 스케줄을 확인합니다."
             android:textColor="@color/white" />
     </LinearLayout>
 

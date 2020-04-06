@@ -7,6 +7,7 @@
     android:background="@color/sky_blue"
     tools:context=".RouteActivity">
 
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -184,7 +185,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="522dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/route_summary"
                 android:orientation="vertical"
@@ -295,11 +296,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="상차 터미널"
+                                android:text="총 배송량"
                                 android:textColor="@color/navy"
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/deliveryTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="T20"
@@ -315,11 +317,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="하차 터미널"
+                                android:text="총 수거량"
                                 android:textColor="@color/navy"
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/takeTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="T26"
@@ -328,8 +331,7 @@
                         </LinearLayout>
                     </TableRow>
 
-                    <TableRow
-                        android:layout_marginTop="10dp">
+                    <TableRow android:layout_marginTop="10dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -339,12 +341,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="물류관리 직원"
+                                android:text="기사"
                                 android:textColor="@color/navy"
                                 android:textSize="14sp" />
 
                             <TextView
-                                android:id="@+id/PtTv"
+                                android:id="@+id/DvNameTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="조성호"
@@ -365,7 +367,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
-                                android:id="@+id/PtPhoneTv"
+                                android:id="@+id/DvPhoneTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="010-1111-2222"
@@ -468,7 +470,7 @@
                     android:layout_marginHorizontal="80dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/divider" />
-                android:background="@drawable/divider" />
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/routeRv"
@@ -490,5 +492,6 @@
         android:textSize="18sp"
         android:background="@color/navy"
         android:layout_alignParentBottom="true" />
+
 
 </RelativeLayout>

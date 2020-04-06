@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.mtsealove.github.buslinkerpt"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -55,4 +55,9 @@ dependencies {
 
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
     implementation 'com.github.hannesa2:AndroidSlidingUpPanel:4.2.0'
+
+    implementation('io.socket:socket.io-client:1.0.0') {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
 }

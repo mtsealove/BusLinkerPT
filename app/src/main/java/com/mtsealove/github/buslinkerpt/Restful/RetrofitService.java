@@ -3,6 +3,7 @@ package com.mtsealove.github.buslinkerpt.Restful;
 import com.mtsealove.github.buslinkerpt.Restful.Request.Ask;
 import com.mtsealove.github.buslinkerpt.Restful.Request.Commute;
 import com.mtsealove.github.buslinkerpt.Restful.Response.Calendar;
+import com.mtsealove.github.buslinkerpt.Restful.Response.Cnt;
 import com.mtsealove.github.buslinkerpt.Restful.Response.Login;
 import com.mtsealove.github.buslinkerpt.Restful.Response.My;
 import com.mtsealove.github.buslinkerpt.Restful.Response.Result;
@@ -37,4 +38,7 @@ public interface RetrofitService {
 
     @GET("/Pt/Timeline")
     Call<Route_Timeline> getRouteTimeline(@Query("ID") String id, @Query("Date") String date);
+
+    @GET("/Pt/Cnt")
+    Call<Cnt> getCnt(@Query("ID") String id);
 }

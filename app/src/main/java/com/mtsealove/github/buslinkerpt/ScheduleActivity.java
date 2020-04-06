@@ -99,7 +99,7 @@ public class ScheduleActivity extends AppCompatActivity {
                         Log.e("calendar", calendar.toString());
                         int year = Integer.parseInt(calendar.getRunDate().split("-")[0]);
                         int month = Integer.parseInt(calendar.getRunDate().split("-")[1]);
-                        int day = Integer.parseInt(calendar.getRunDate().split("-")[2])+1;
+                        int day = Integer.parseInt(calendar.getRunDate().split("-")[2]);
                         calendarDays.add(CalendarDay.from(year, month, day));
                     }
                     calendarView.addDecorator(new EventDecorator(calendarDays));

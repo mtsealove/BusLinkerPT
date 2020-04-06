@@ -5,4 +5,5 @@
     <declare-styleable name="HorizontalLogoView" />
     <declare-styleable name="LogoView" />
     <declare-styleable name="HeaderView" />
+    <declare-styleable name="ReadyView" />
  </resources>
